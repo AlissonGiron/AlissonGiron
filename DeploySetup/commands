@@ -1,0 +1,17 @@
+dotnet publish -c Release
+
+// copiar o arquivo Dockerfile para ./bin/Release/netcoreapp2.1/publish 
+
+// Se não tiver o docker instalado
+sudo pacman -S docker
+
+sudo systemctl start docker
+sudo docker build -t alissongiron ./bin/Release/netcoreapp2.1/publish
+
+sudo heroku login
+sudo heroku container:login
+
+sudo docker tag alissongiron registry.heroku.com/alissongiron/web
+sudo docker push registry.heroku.com/alissongiron/web
+
+heroku container:release web --app alissongiron
