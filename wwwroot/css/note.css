@@ -1,0 +1,56 @@
+#notepad {
+    min-width:  100vw;
+    min-height: 100vh;
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+.header {
+    position: absolute;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    top: -1;
+    opacity: 1;
+    resize: both;
+
+    transition: all linear 0.1s;
+}
+
+.header:hover {
+    cursor: pointer;
+}
+
+.header.hidden {
+    opacity: 0;
+    transition: all linear 0.1s;
+}
+
+.body {
+    position: absolute;
+    border-radius: 5px;
+}
+
+.box {
+    position: absolute;
+}
+
+.textarea {
+    width: 100%;
+    height: 100%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    overflow: auto;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border: none;
+}
+
+.textarea.borderVisible {
+    border: 1px solid lightgray;
+}
+
