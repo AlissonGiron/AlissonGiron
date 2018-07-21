@@ -42,8 +42,9 @@ h2 {
     background-color: black;
     position: absolute;
     left: 0;
-    z-index: 1;
-    opacity: 0.5;
+    z-index: 5;
+    opacity: 0.9;
+    transform: skew(30deg);
 }
 
 .rightDiv {
@@ -112,6 +113,7 @@ p {
     height: 20px; 
     width: 20px;
     background-color: lightgreen;
+    color: transparent;
 }
 
 #hamburger:hover {
@@ -135,11 +137,12 @@ p {
 }
 
 .background-gif {
-    background-image:url('images/background.gif');
+    /* background-image:url('images/background.gif'); */
+    background-image: url('images/blur-bulb-close-up-371906.jpg');
     background-position: center;
     background-size: cover;
     height: 100vh;
-    width: 50vw;
+    width: 100vw;
     position: absolute;
 }
 
@@ -151,6 +154,65 @@ p {
     background-color: whitesmoke;
 }
 
+.navbar {
+    position: absolute; 
+    color: lightgreen; 
+    z-index: 10; 
+    right: 0; 
+    top:0; 
+    padding: 20px; 
+}
+
+.navbar a {
+    text-decoration: none;
+    color: lightgreen;
+    padding: 10px;
+    margin: 10px;
+    font-family: monospace;
+    border-radius: 5px;
+}
+
+#spotify-info {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    width: auto;
+    padding-left: 20px;
+    padding-right: 50px;
+    height: 80px;
+    border: 1px solid lightgreen;
+    z-index: 100;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+#spotify-info div {
+    height: 100%;
+}
+
+#spotify-info h4 {
+    color: lightgreen;
+}
+
+#spotify-info:hover {
+    transform: scale(1.02);
+}
+
+
+
+.navbar a:hover {
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.principal {
+    border: 1px solid lightgreen;
+}
+
+
+.principal:hover {
+    border: 1px solid whitesmoke;
+}
 
 @@media (max-width: 720px)
 {
@@ -189,6 +251,10 @@ p {
     .info-card {
         text-align: center;
     }
+
+    .background-video-blur {
+        transform: skew(0);
+    }
 }
 
 </style>
@@ -199,8 +265,8 @@ p {
 <div class="background-video-blur">
 </div>
 
-<div class="menu">
-    <div id="menu-content" class="hidden">
+<!-- <div class="menu">
+    <div id="menu-content" class="hidden" style="background-color: transparent;">
         <div class="col-xs-10 col-xs-offset-1" style="height: 80vh; margin-top: 10vh; display: flex; justify-content: center; align-items: center;">
             <div class="col-xs-12" style="color: white; font-family: monospace; background-color: indianred; padding: 20px; text-align: center; font-size: 20px; border-radius: 20px;">
                 em construção...
@@ -213,6 +279,17 @@ p {
     <div class="hamburger-fill"></div>
     <div class="hamburger-fill"></div>
     <div class="hamburger-fill"></div>
+
+    <h5 style="color:lightgreen; text-align:center; font-weight: bold;">
+    menu
+    </h5>
+</div> -->
+
+<div class="navbar">
+    <a class="btn principal" href="https://www.alissongiron.com">Início</a>
+    <a>Publicações</a>
+    <a>Projetos</a>
+    <a>Sobre</a>
 </div>
 
 <div class="row">
@@ -222,11 +299,37 @@ p {
             <div class="leftDiv">
                 <div style="text-align:center; z-index: 10;">
                     <h1>Alisson Giron</h1>
-                    <h2>&lt;!--   Desenvolvedor de Software  --> </h2>
+                    <h2>&lt;!--   desenvolvedor de software  --> </h2>
                 </div>
             </div>
         </div>
 
+        <div style="position: absolute; bottom: 20px; right: 30px; z-index: 10;">
+            <a title="Ir para Linkedin" class="btn btn-link" href="https://www.linkedin.com/in/alissongiron/" style="border: 0; background-color: transparent;">
+                <img height="20px" src="images/linkedin.png">
+            </a>
+
+            <a title="Ir para Facebook" class="btn btn-link" href="https://www.facebook.com/alisson.giron.58" style="border: 0; background-color: transparent;">
+                <img height="20px" src="images/facebook.png">
+            </a>
+        
+            <a title="Ir para Github" class="btn btn-link" href="https://github.com/AlissonGiron" style="border: 0; background-color: transparent;">
+                <img height="20px" src="images/github-white.png">
+            </a>
+        </div>
+
+        <a id="spotify-info">
+            <div class="col-xs-4" style="position: relative;">
+                <img id="icon_music" height="50px" width="50px" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0; margin: auto;">
+            </div>
+            <div class="col-xs-8">
+                <h4 id="music_name">Título</h4>
+                <h4 id="artist_name">Artista</h4>
+            </div>
+        </a>
+        
+
+        <!--
         <div class="rightDiv col-xs-12 col-md-6">
             <div class="row" style="margin-top: 20vh; height: 70vh;">
                 <div class="col-xs-10 col-xs-offset-1">
@@ -299,37 +402,75 @@ p {
                     </a>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
+
+    
 </div>
 
 
 
 <script>
-    $(document).ready(function() {
-        $("#hamburger").on('click', function() {
-            var menu = $('.menu');
-            
-            if(menu.hasClass('menu-open'))
-            {
-                $("#menu-content").addClass('hidden');
+    var music_id = "";
 
-                setTimeout(function () { menu.removeClass('menu-open'); }, 100);
-            }
-            else {
-                $(".hamburger-fill").hide();
-                $("#hamburger").addClass('hamburger-clicked');
-                
-                menu.addClass('menu-open');
-                
-                setTimeout(function () { 
-                    $("#menu-content").removeClass('hidden');
-                    $("#hamburger").removeClass('hamburger-clicked'); 
-                    $(".hamburger-fill").show();
-                }, 250);
-            }
-        });
+    $(document).ready(function() {
+        $("#spotify-info").hide();
+
+        setInterval(getSpotify, 3000);
     });
+
+    function getSpotify() {
+        $.ajax({
+            url: "https://api.spotify.com/v1/me/player/currently-playing",
+            type: "GET",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer BQCrOWl7eHSxxiRmoAJa_Flt-e5l85HoNFBLs_-jYXtQqAR4aaavVQZdmpwTIkB-1K-hGVcxC4L4JdDEgcCv3lY-mtrX56tgeeXk4JphXUQlBjXmjzsZg0ih3ThNHVmz9-CP_WKuinf4a6BHtGlhg0Y');
+            }
+        })
+        .done(function (data) { 
+            if(data == undefined || (data.item.id == music_id && data.is_playing)) return;
+
+            if(!data.is_playing || data.is_playing == undefined) {
+                $("#spotify-info").hide();
+                music_id = "";  
+                return;
+            }
+
+            var curMusic = {
+                music_name: "",
+                artist_name: "",
+                icon_url: "",
+                link: "",
+                duration: 0,
+                progress: 0
+            }
+
+            curMusic.music_name = data.item.name;
+            curMusic.icon_url = data.item.album.images[0].url;
+
+            curMusic.link = data.item.external_urls.spotify;
+            curMusic.duration = data.item.duration_ms;
+            curMusic.progress = data.progress_ms;
+
+            var artists = data.item.artists.map(function(o) { return o.name; });
+            curMusic.artist_name = artists[0];
+
+            for(var i = 1; i < artists.lenght; i++)
+            {
+                curMusic.artist_name += " | " + artists[i];
+            }
+
+            $("#icon_music").attr('src', curMusic.icon_url);
+            $("#music_name").html(curMusic.music_name);
+            $("#artist_name").html(curMusic.artist_name);
+            $("#spotify-info").attr('href', curMusic.link);
+
+            music_id = data.item.id;
+            $("#spotify-info").show();
+        })
+        .fail(function (data) { console.log(data); });
+    }
 </script>
+
 
 
