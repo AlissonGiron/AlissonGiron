@@ -1,0 +1,108 @@
+@{
+    ViewData["Title"] = "Post Tool";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<style>
+
+html, body {
+    padding: 0;
+    margin: 0;
+    background-color: black;
+    overflow: hidden;
+}
+
+.body-bar {
+    background-color:#243447;
+    color: white;
+}
+
+.body-editor {
+    border-radius: 10px;
+    background-color: #141d26;
+}
+
+.with-bar {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.save-button {
+    top: 2vh;
+    height: 6vh;
+    width: 10vw;
+    right: 0;
+    position: absolute;
+}
+
+.import-button {
+    top: 2vh;
+    height: 6vh;
+    width: 10vw;
+    right: 11vw;
+    position: absolute;
+}
+
+.header-item {
+    height: 6vh;
+    margin-top: 2vh;
+    color: white;
+    background-color: transparent;
+}
+
+.footer-item {
+    border-radius: 10px;
+    background-color: #141d26;
+    height: 100%;
+    width: 100%;
+    color: white;
+    font-family: monospace;
+    font-size: 16px;
+}
+
+</style>
+        
+<div class="col-md-10 col-md-offset-1">
+    <div class="row" style="height: 10vh;">
+        <button class="btn btn-warning import-button">Carregar</button>
+        <button class="btn btn-danger save-button">Salvar</button>
+    </div>
+    <div class="row" style="height: 80vh;">
+        <div class="row body-bar" style="height: 10vh;">
+            <div class="col-xs-10">
+                <div class="col-xs-1">
+                    <p class="pull-right" style="line-height: 10vh;">Url<p>
+                </div>                
+                <div class="col-xs-11">
+                    <input type="text" class="form-control header-item">
+                </div>                
+            </div>
+            <div class="col-xs-2">
+                <button class="btn btn-default header-item" style="width: 100%;">Opções</button>
+            </div>
+        </div>
+        <div class="row body-editor with-bar" style="height: 70vh;"></div>
+        
+    </div>
+
+    <div class="row" style="height: 10vh;">
+        <div class="col-xs-4" style="padding: 5px; height: 100%">
+            <button class="btn footer-item">
+                Executar antes de Enviar
+            </button>
+        </div>
+         <div class="col-xs-4" style="padding: 5px; height: 100%">
+            <button class="btn footer-item" style="background-color: darkred;">
+                Enviar
+            </button>
+        </div>
+         <div class="col-xs-4" style="padding: 5px; height: 100%">
+            <button class="btn footer-item">
+                Executar depois de Enviar
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+</script>
